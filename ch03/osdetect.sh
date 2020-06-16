@@ -10,13 +10,21 @@
 #   output will be one of: Linux MSWin macOS
 #
 
-if type -t wevtutil &> /dev/null           # <1>
-then
-    OS=MSWin
-elif type -t scutil &> /dev/null           # <2>
-then
-    OS=macOS
-else
-    OS=Linux
-fi
+#Global Variables
+OS=""
+
+function detectOS ()
+{
+	if type -t wevtutil &> /dev/null           # <1>
+	then
+    	    OS=MSWin
+	elif type -t scutil &> /dev/null           # <2>
+	then
+    	    OS=macOS
+	else
+    	    OS=Linux
+	fi
+}
+
+detectOS
 echo $OS
