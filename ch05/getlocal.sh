@@ -55,7 +55,8 @@ function DumpInfo ()
 OSTYPE=$(./osdetect.sh)                     # <1>
 HOSTNM=$(hostname)                          # <2>
 TMPFILE="${HOSTNM}.info"                    # <3>
+LOGHOST=${LOGHOST;-ec2-18-191-215-235.us-east-2.compute.amazonaws.com}
 
 # gather the info into the tmp file; errors, too
 DumpInfo  > $TMPFILE  2>&1                  # <4>
-
+scp -i /home/ubuntu/ssh/.ssh/filename $TMPFILE ${LOGHOST}:/home/ubuntu/logs

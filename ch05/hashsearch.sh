@@ -15,6 +15,8 @@
 
 HASH=$1
 DIR=${2:-.}	# default is here, cwd
+JUST1=""
+[[ ${1:0:2} == -1 ]] && { JUST1=YES; shift; }
 
 # convert pathname into an absolute path
 function mkabspath ()				# <6>
@@ -34,7 +36,8 @@ do
     THISONE=${THISONE%% *}			# <3>
     if [[ $THISONE == $HASH ]]
     then
-	mkabspath "$fn"				# <4>
-	echo $ABS				# <5>
+	    mkabspath "$fn"				# <4>
+	    echo $ABS				# <5>
+        if [[ $JUST1 ]] ; then exit 0 ; fi
     fi
 done
